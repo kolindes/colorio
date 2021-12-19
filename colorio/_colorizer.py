@@ -1,3 +1,5 @@
+# Copyright ANS BSD 3-Clause license, see LICENSE file.
+
 from colorama.ansi import AnsiFore, Fore
 
 from .exceptions import InvalidColorName
@@ -9,7 +11,7 @@ class _Colorizer(AnsiFore):
             item = item.replace('_', '')
         return getattr(Fore, item.upper() + ('_EX' if item.startswith('light') else ''))
 
-    def __call__(self, s: str, color: str):
+    def __call__(self, s: str, color: str) -> str:
         if not hasattr(self, color):
             raise InvalidColorName(color)
         return getattr(self, color) + s + getattr(self, 'WHITE')

@@ -1,7 +1,9 @@
+# Copyright ANS BSD 3-Clause license, see LICENSE file.
+
 from typing import Tuple
 
 from ._color_string import ColorStr
-from .io import _ri
+from .io import ri
 
 
 def colorize(v) -> ColorStr:
@@ -22,8 +24,8 @@ def colorize(v) -> ColorStr:
     return ColorStr(v)
 
 
-def inp(hint: str = '>', color: str = 'light_cyan', min_length: int = 0, max_length: int = 0, custom_err: str = ''):
-    return _ri(getattr(ColorStr(hint), color), min_length, max_length, custom_err)
+def inp(hint: str, color: str = 'light_cyan', min_length: int = 0, max_length: int = 0, custom_err: str = '') -> any:
+    return ri(getattr(ColorStr(hint), color), min_length, max_length, custom_err)
 
 
 def paint(*v, color: str = 'white') -> Tuple[any]:
@@ -35,5 +37,16 @@ def paint_bool(b: bool) -> str:
     return clr.lightgreen if b else clr.red
 
 
-def str_bool_based(positive: str, negative: str, b: bool):
+def str_bool_based(positive: str, negative: str, b: bool) -> str:
+    """
+
+    :param positive: positive choice (light_green)
+
+    :param negative: negative choice (light_red)
+
+    :param b: bool True/False
+
+    :return: a string positive/negative choice
+
+    """
     return colorize(positive).light_green if b else colorize(negative).light_red

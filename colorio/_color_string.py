@@ -1,3 +1,5 @@
+# Copyright ANS BSD 3-Clause license, see LICENSE file.
+
 from ._colorizer import _Colorizer
 
 COLORS = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'light_black',
@@ -18,5 +20,5 @@ class ColorStr(str):
         self._colorizer = _Colorizer()
         self + str(s)
 
-    def __getattr__(self, color: str):
+    def __getattr__(self, color: str) -> str:
         return self._colorizer(self, color)
